@@ -28,3 +28,11 @@ func _process(delta):
 		$Sprite.flip_h = true
 		if($".".position.x <= posicao_inicial):
 			flip = true
+			
+
+# Função para destruição do monstro
+func dano():
+	get_node("anime").play("die")
+	
+func die():
+	$".".queue_free() # Destroy o NÓ principal (Monstro)

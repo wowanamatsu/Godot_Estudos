@@ -6,6 +6,7 @@ const GRAVIY = 20
 const SPEED = 200
 const JUMP_HEIGHT = -550
 var motion = Vector2()
+var life = 3
 
 func _physics_process(delta):
 	
@@ -31,4 +32,22 @@ func _physics_process(delta):
 	else: $Sprite.play("Jump")
 		
 	motion = move_and_slide(motion, CHAO)
+	
+
+
+# Ao tocar um monstro a função dano do monstro é ativada.
+func _on_pes_body_entered(body):
+	body.dano()
+	motion.y = JUMP_HEIGHT
+	
+
+# Toda vez que o player é tocado por um monstro perde vida.
+func _on_dano_body_entered(body):
+	life -= 1
+	if life == 0: 
+		$".".queue_free()
+		get_tree().change_scene("Menu.tscn")
+	
+	
+	
 	
